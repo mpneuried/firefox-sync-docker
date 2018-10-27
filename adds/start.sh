@@ -1,16 +1,20 @@
 #!/bin/bash
 
+failure=false
+
 if [ ! -e /CONF ]; then
 	echo ":: please mount conf folder with syncserver.ini to /CONF via -v."
-	echo ":: A example syncserver.ini can be found on"
-	echo ":: https://raw.githubusercontent.com/silvio/docker-firefox-sync/master/syncserver.ini"
-	exit 1
+	failure=true
 fi
 
 if [ ! -e /CONF/syncserver.ini ]; then
 	echo ":: /CONF folder needs a syncserver.ini"
+	failure=true
+fi
+
+if ${failure}; then
 	echo ":: A example syncserver.ini can be found on"
-	echo ":: https://raw.githubusercontent.com/silvio/docker-firefox-sync/master/syncserver.ini"
+	echo ":: https://github.com/mozilla-services/syncserver/blob/master/syncserver.ini"
 	exit 1
 fi
 
